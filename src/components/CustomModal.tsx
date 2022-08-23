@@ -9,7 +9,29 @@ interface CustomModalProps {
   Park: ()=>void;
 }
 
+
+
 const CustomModal: FC<CustomModalProps> = ({ visible, setVisible, regNumber, setRegNumber ,Park}) => {
+
+  const isValid = () => {
+    if(regNumber.trim() == ''){
+      Alert.alert('Enter Reg. Number');
+      return false;
+    }else{
+      return Park()
+    }
+  }
+  
+  const handlePress = () => {
+
+    if(!regNumber){
+      Alert.alert("Enter car registration number")
+    }else{
+      Park(),
+      setRegNumber(''),
+      setVisible(false)
+    }
+  }
 
   return (
     <Modal
@@ -38,10 +60,7 @@ const CustomModal: FC<CustomModalProps> = ({ visible, setVisible, regNumber, set
           </View>
           <Pressable
             style={[styles.button, styles.buttonClose]}
-            onPress={() => {
-              Park(),
-              setVisible(false)
-            }}
+            onPress={() => {handlePress()}}
           >
             <Text style={styles.textStyle}>Booking</Text>
           </Pressable>
